@@ -1,0 +1,60 @@
+import java.util.Scanner;
+
+class AssignmentP2 {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a sentence: ");
+        String sentence = sc.nextLine();
+
+        System.out.print("Enter a character to search: ");
+        char ch = sc.nextLine().charAt(0);
+
+        sentence = sentence.trim();
+
+        String[] words = sentence.split(" ");
+
+        int wordCount = words.length;
+
+        int firstSpace = sentence.indexOf(" ");
+        int lastSpace = sentence.lastIndexOf(" ");
+
+        String firstWord;
+        String lastWord;
+
+        if (firstSpace == -1) {
+            firstWord = sentence.substring(0);
+            lastWord = sentence.substring(0);
+        } else {
+            firstWord = sentence.substring(0, firstSpace);
+            lastWord = sentence.substring(lastSpace + 1);
+        }
+
+        int firstIndex = sentence.indexOf(ch);
+        int lastIndex = sentence.lastIndexOf(ch);
+
+        int comparison = firstWord.compareTo(lastWord);
+
+        char[] characters = sentence.toCharArray();
+
+        int asciiValue = characters[0];
+
+        char firstCharacter = sentence.charAt(0);
+
+        String characterAsString = String.valueOf(firstCharacter);
+
+        System.out.println("\n--- Analysis Report ---");
+        System.out.println("Word Count : " + wordCount);
+        System.out.println("First Word : " + firstWord);
+        System.out.println("Last Word : " + lastWord);
+        System.out.println("First '" + ch + "' index : " + firstIndex);
+        System.out.println("Last '" + ch + "' index : " + lastIndex);
+        System.out.println("Comparison (first vs last word) : " + comparison);
+        System.out.println("First Character : " + characterAsString);
+        System.out.println("First Character ASCII Value : " + asciiValue);
+
+        sc.close();
+    }
+}
