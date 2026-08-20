@@ -1,0 +1,85 @@
+import java.util.Scanner;
+
+public class AssignmentP3 {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter first string: ");
+        String str1 = sc.nextLine();
+
+        System.out.print("Enter second string: ");
+        String str2 = sc.nextLine();
+
+        System.out.print("Enter third string: ");
+        String str3 = sc.nextLine();
+
+        String cleanedStr1 = str1.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        String cleanedStr2 = str2.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        String cleanedStr3 = str3.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+
+        String reversed = new StringBuilder(cleanedStr1).reverse().toString();
+
+        boolean palindrome = cleanedStr1.equals(reversed);
+
+        boolean anagram = true;
+
+        if (cleanedStr2.length() != cleanedStr3.length()) {
+            anagram = false;
+        } else {
+            for (int i = 0; i < cleanedStr2.length(); i++) {
+                char ch = cleanedStr2.charAt(i);
+
+                int count1 = 0;
+                int count2 = 0;
+
+                for (int j = 0; j < cleanedStr2.length(); j++) {
+                    if (cleanedStr2.charAt(j) == ch) {
+                        count1++;
+                    }
+
+                    if (cleanedStr3.charAt(j) == ch) {
+                        count2++;
+                    }
+                }
+
+                if (count1 != count2) {
+                    anagram = false;
+                    break;
+                }
+            }
+        }
+
+        boolean alphanumeric = cleanedStr1.matches("[a-zA-Z0-9]+");
+
+        boolean containsPlan = cleanedStr1.contains("plan");
+
+        String formattedReport = String.format(
+                "Palindrome : %s | Anagram : %s",
+                palindrome,
+                anagram
+        );
+
+        String finalReport = String.join("\n",
+                "Palindrome Check : \"" + str1 + "\" -> " + palindrome,
+                "Anagram Check : \"" + str2 + "\" & \"" + str3 + "\" -> " + anagram,
+                "Formatted Report : [ " + formattedReport + " ]",
+                "Contains 'plan': " + containsPlan,
+                "Alphanumeric Check : " + alphanumeric
+        );
+
+        String poolString1 = "Java";
+        String poolString2 = new String("Java");
+
+        poolString2 = poolString2.intern();
+
+        boolean hashCodesEqual =
+                poolString1.hashCode() == poolString2.hashCode();
+
+        System.out.println("\n" + finalReport);
+        System.out.println("HashCodes equal for interned strings : " + hashCodesEqual);
+
+        sc.close();
+    }
+}
