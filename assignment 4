@@ -1,0 +1,83 @@
+import java.util.Scanner;
+
+public class AssignmentP4 {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter full name: ");
+        String fullName = sc.nextLine();
+
+        System.out.print("Enter email: ");
+        String email = sc.nextLine();
+
+        System.out.print("Enter sentence: ");
+        String sentence = sc.nextLine();
+
+        fullName = fullName.trim();
+
+        String[] nameParts = fullName.split(" ");
+        String formattedName = "";
+
+        for (int i = 0; i < nameParts.length; i++) {
+            if (!nameParts[i].isBlank()) {
+                String part = nameParts[i].toLowerCase();
+                String cap = part.substring(0, 1).toUpperCase() + part.substring(1);
+                formattedName += cap + " ";
+            }
+        }
+
+        formattedName = formattedName.trim();
+
+        email = email.trim();
+
+        int atIndex = email.indexOf("@");
+        String firstPart = email.substring(0, atIndex);
+        String domain = email.substring(atIndex);
+
+        String visible = firstPart.substring(0, Math.min(3, firstPart.length()));
+        String masked = visible + "*".repeat(Math.max(0, firstPart.length() - 3)) + domain;
+
+        boolean validEmail = email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+
+        String[] words = sentence.split(" ");
+        String reversedSentence = "";
+
+        for (int i = 0; i < words.length; i++) {
+            String w = words[i];
+            String rev = "";
+            for (int j = w.length() - 1; j >= 0; j--) {
+                rev += w.charAt(j);
+            }
+            reversedSentence += rev + " ";
+        }
+
+        reversedSentence = reversedSentence.trim();
+
+        int vowelCount = 0;
+        char[] chars = sentence.toLowerCase().toCharArray();
+
+        for (char c : chars) {
+            if ("aeiou".indexOf(c) != -1) {
+                vowelCount++;
+            }
+        }
+
+        String s1 = "Java";
+        String s2 = new String("Java");
+
+        boolean equalsCheck = s1.equals(s2);
+        boolean referenceCheck = (s1 == s2);
+
+        System.out.println("Formatted Name : " + formattedName);
+        System.out.println("Masked Email : " + masked);
+        System.out.println("Valid Email : " + validEmail);
+        System.out.println("Reversed Words : " + reversedSentence);
+        System.out.println("Vowel Count : " + vowelCount);
+        System.out.println("equals() : " + equalsCheck);
+        System.out.println("== : " + referenceCheck);
+
+        sc.close();
+    }
+}
