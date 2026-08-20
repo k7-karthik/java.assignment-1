@@ -1,0 +1,34 @@
+import java.util.Scanner;
+
+ class AssignmentP1 {
+
+    public static String processText(String input) {
+        String result = input.trim();
+        if (result.isEmpty()) {
+            return "EMPTY STRING";
+        }
+        if (result.equalsIgnoreCase("admin")) {
+            return "RESERVED WORD";
+        }
+        result = result.replace("_", " ");
+        if (result.toLowerCase().startsWith("temp")
+                && result.toLowerCase().endsWith("user")) {
+
+            result = result.concat("_FLAGGED");
+        }
+        return result;
+    }
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String input = sc.nextLine();
+
+        String output = processText(input);
+
+        System.out.println("Output: " + output);
+
+        sc.close();
+    }
+}
